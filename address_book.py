@@ -35,12 +35,12 @@ class Record:
             raise KeyError
         return phones[0]
 
-    def delete_phone(self, number):
+    def remove_phone(self, number):
         phone = self.find_phone(number)
         self.phones.remove(phone)
     
     def edit_phone(self, number, new_number):
-        self.delete_phone(number)
+        self.remove_phone(number)
         self.add_phone(new_number)
 
     def __str__(self):
