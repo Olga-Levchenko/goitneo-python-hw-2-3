@@ -13,10 +13,12 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
+        if not self.is_valid(value):
+           raise ValueError
         super().__init__(value)
 
-    def is_valid(self):
-        return self.value.isdigit() and len(self.value) == 10
+    def is_valid(self, value):
+        return value.isdigit() and len(value) == 10
 
 class Record:
     def __init__(self, name):
@@ -25,8 +27,6 @@ class Record:
     
     def add_phone(self, number):
         phone = Phone(number)
-        if not phone.is_valid():
-            raise ValueError
         self.phones.append(phone)
 
     def find_phone(self, number):
